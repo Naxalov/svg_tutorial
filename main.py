@@ -1,16 +1,29 @@
 import svgwrite
 
-array_2d = [1,2,3,4]
-dwg = svgwrite.Drawing('test.svg', profile='full',size=(300,300))
-
-dwg.add(dwg.line((50, 0), (100, 100), stroke=svgwrite.rgb(10, 10, 16, '%')))
-
-dwg.add(dwg.text(
-    'Test', 
-    insert=(100, 100), 
-    fill='red',
-    # style = "font-size:20px"
-    font_size="60px"
+def gride_2d(data):
+    # row
+    w = len(data)
+    # column
+    h = len(data[0])
     
-    ))
+
+array_2d = [
+    [1,2],
+    [3,4]
+]
+dwg = svgwrite.Drawing('test.svg', profile='full',size=(300,300))
+x = 0
+y = 10
+for i in array_2d:
+    x+=80
+    rect = dwg.rect(
+        insert=(x,y),
+        size=(50,50),
+        fill='red',
+        rx=10,
+        stroke='black',
+        stroke_width=5
+        )
+    dwg.add(rect)
+
 dwg.save()
